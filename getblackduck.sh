@@ -1,4 +1,4 @@
 #!/bin/bash
-curl https://github.com/jayunit100/blackduckctl/raw/master/blackduckctl > blackduckctl
+curl -kL https://github.com/jayunit100/blackduckctl/raw/master/blackduckctl > blackduckctl
 chmod 777 blackductl
 ./blackduckctl cluster
