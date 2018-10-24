@@ -37,7 +37,7 @@ func Run(args []string) error {
 		runCmd("kubectl", "cluster-info")
 	} else if args[0] == "list" {
 		if args[1] == "hubs" {
-			runCmd("kubectl", "get", "hub")
+			runCmd("kubectl", "get", "hubs", "--all-namespaces")
 		} else {
 			fmt.Println("Error: Did you mean 'list hubs' ?")
 		}
