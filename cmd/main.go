@@ -1,32 +1,54 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/manifoldco/promptui"
 )
 
 func promptuiExample() {
 	prompt := promptui.Select{
-		Label: "Select Day",
+		Label: "Select operation",
 		Items: []string{
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday",
-			"Sunday",
+			"opssight",
+			"blackduck",
+			"api",
 		},
 	}
-	_, result, err := prompt.Run()
-	if err != nil {
-		fmt.Printf("Prompt failed %v\n", err)
-		return
+	_, result, _ := prompt.Run()
+	if result == "api" {
+		prompt := promptui.Select{
+			Label: "Select operation",
+			Items: []string{
+				"all-components",
+				"all-projects",
+				"list-hubs",
+			},
+		}
+		prompt.Run()
 	}
-	fmt.Printf("You choose %q\n", result)
+	if result == "opssight" {
+		prompt := promptui.Select{
+			Label: "Select operation",
+			Items: []string{
+				"status",
+				"throughput",
+				"ns-vuln",
+				"deploy",
+			},
+		}
+		prompt.Run()
+	}
+	if result == "blackduck" {
+		prompt := promptui.Select{
+			Label: "Select operation",
+			Items: []string{
+				"status",
+				"deploy",
+			},
+		}
+		prompt.Run()
+	}
 }
 
 func main() {
-	fmt.Println("---")
+	promptuiExample()
 }
