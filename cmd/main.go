@@ -1,54 +1,27 @@
 package main
 
 import (
-	"github.com/manifoldco/promptui"
+	"fmt"
+	"os"
+	"github.com/blackducksoftware/blackduckct-ctl/pkg/interactive"
+	"github.com/spf13/viper"
 )
 
-func promptuiExample() {
-	prompt := promptui.Select{
-		Label: "Select operation",
-		Items: []string{
-			"opssight",
-			"blackduck",
-			"api",
-		},
-	}
-	_, result, _ := prompt.Run()
-	if result == "api" {
-		prompt := promptui.Select{
-			Label: "Select operation",
-			Items: []string{
-				"all-components",
-				"all-projects",
-				"list-hubs",
-			},
-		}
-		prompt.Run()
-	}
-	if result == "opssight" {
-		prompt := promptui.Select{
-			Label: "Select operation",
-			Items: []string{
-				"status",
-				"throughput",
-				"ns-vuln",
-				"deploy",
-			},
-		}
-		prompt.Run()
-	}
-	if result == "blackduck" {
-		prompt := promptui.Select{
-			Label: "Select operation",
-			Items: []string{
-				"status",
-				"deploy",
-			},
-		}
-		prompt.Run()
-	}
+type Blackduckctl struct {
+	LaunchUI bool
 }
 
 func main() {
-	promptuiExample()
+	viper.ReadInConfig()
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Println("Can't read config:", err)
+		os.Exit(1)
+	}
+	config := &Blackduckctl{}
+	viper.Unmarshal(config)
+
+	if config.LaunchUI {
+		pkg.
+	}
+
 }
