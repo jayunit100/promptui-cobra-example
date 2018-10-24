@@ -15,7 +15,9 @@ package apps
 // limitations under the License.
 
 import (
+	"bytes"
 	"fmt"
+	"os/exec"
 
 	"github.com/spf13/cobra"
 )
@@ -24,9 +26,11 @@ var clustercommand = &cobra.Command{
 	Use:   "cluster",
 	Short: "tells you what cluster your on",
 	Run: func(cmd *cobra.Command, args []string) {
-		if sayIt, _ := cmd.Flags().GetBool("omg"); sayIt {
-			fmt.Println("omg ok i said it !")
-		}
+		cmd2 := exec.Command("kubectl", "cluster-info")
+		var out bytes.Buffer
+		cmd2.Stdout = &out
+		cmd2.Run()
+		fmt.Printf("*** \n %v \n ****", out.String())
 	},
 }
 
