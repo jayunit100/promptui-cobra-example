@@ -22,22 +22,35 @@ import (
 	"github.com/spf13/cobra"
 )
 
+func runCmd(cmd string, args ...string) {
+	cmd2 := exec.Command(cmd, args...)
+	var out bytes.Buffer
+	cmd2.Stdout = &out
+	cmd2.Run()
+	fmt.Printf("%v", out.String())
+}
+
 var clusterCommand = &cobra.Command{
 	Use:   "cluster",
 	Short: "tells you what cluster your on",
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd2 := exec.Command("kubectl", "cluster-info")
-		var out bytes.Buffer
-		cmd2.Stdout = &out
-		cmd2.Run()
-		fmt.Printf("*** \n %v \n ****", out.String())
+		if args == nil || len(args) == 0 {
+			cmd.Help()
+		} else if args[0] == "status" {
+			runCmd("kubectl", "cluster-info")
+		} else if args[0] == "list" {
+			if args[1] == "hubs" {
+				runCmd("kubectl", "get", "hub")
+			} else {
+				fmt.Println("Error: Did you mean 'list hubs' ?")
+			}
+		} else {
+			cmd.Help()
+		}
 	},
 }
 
 // implementing init is important ! thats how cobra knows to bind your 'app' to top level command.
 func init() {
 	RootCmd.AddCommand(clusterCommand)
-
-	// specific flags for your app, add them here...
-	clusterCommand.Flags().BoolP("omg", "o", false, "oh wow ")
 }

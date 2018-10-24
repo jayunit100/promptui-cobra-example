@@ -14,6 +14,17 @@ func Launch() {
 		},
 	}
 	_, result, _ := prompt.Run()
+	if result == "cluster" {
+		prompt := promptui.Select{
+			Label: "Select operation",
+			Items: []string{
+				"status",
+				"hubs",
+			},
+		}
+		prompt.Run()
+
+	}
 	if result == "api" {
 		prompt := promptui.Select{
 			Label: "Select operation",
