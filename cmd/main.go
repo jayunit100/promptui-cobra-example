@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
-	"github.com/blackducksoftware/blackduckct-ctl/pkg/interactive"
+
+	"github.com/jayunit100/blackduck-ctl/pkg/interactive2"
 	"github.com/spf13/viper"
 )
 
@@ -21,7 +22,7 @@ func main() {
 	viper.Unmarshal(config)
 
 	if config.LaunchUI {
-		pkg.
+		interactive2.Launch()
 	}
 
 }
