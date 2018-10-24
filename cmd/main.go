@@ -1,7 +1,21 @@
 package main
 
-import "github.com/jayunit100/blackduck-ctl/pkg/apps"
+import (
+	"fmt"
+	"os"
+
+	"github.com/jayunit100/blackduck-ctl/pkg/interactive2"
+
+	"github.com/jayunit100/blackduck-ctl/pkg/apps"
+)
 
 func main() {
-	apps.Execute()
+	if len(os.Args) > 1 {
+		if os.Args[1] == "gui" {
+			interactive2.Launch()
+		}
+	} else {
+		apps.Execute()
+	}
+	fmt.Println("Goodbye !")
 }

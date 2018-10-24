@@ -30,21 +30,28 @@ func runCmd(cmd string, args ...string) {
 	fmt.Printf("%v", out.String())
 }
 
-var clusterCommand = &cobra.Command{
+func Run(args []string) error {
+	if args == nil || len(args) == 0 {
+		return fmt.Errorf("No subcommand provided !")
+	} else if args[0] == "status" {
+		runCmd("kubectl", "cluster-info")
+	} else if args[0] == "list" {
+		if args[1] == "hubs" {
+			runCmd("kubectl", "get", "hub")
+		} else {
+			fmt.Println("Error: Did you mean 'list hubs' ?")
+		}
+	} else {
+		return fmt.Errorf("Invalid subcommand provided.")
+	}
+	return nil
+}
+
+var ClusterCommand = &cobra.Command{
 	Use:   "cluster",
 	Short: "tells you what cluster your on",
 	Run: func(cmd *cobra.Command, args []string) {
-		if args == nil || len(args) == 0 {
-			cmd.Help()
-		} else if args[0] == "status" {
-			runCmd("kubectl", "cluster-info")
-		} else if args[0] == "list" {
-			if args[1] == "hubs" {
-				runCmd("kubectl", "get", "hub")
-			} else {
-				fmt.Println("Error: Did you mean 'list hubs' ?")
-			}
-		} else {
+		if err := Run(args); err != nil {
 			cmd.Help()
 		}
 	},
@@ -52,5 +59,5 @@ var clusterCommand = &cobra.Command{
 
 // implementing init is important ! thats how cobra knows to bind your 'app' to top level command.
 func init() {
-	RootCmd.AddCommand(clusterCommand)
+	RootCmd.AddCommand(ClusterCommand)
 }
