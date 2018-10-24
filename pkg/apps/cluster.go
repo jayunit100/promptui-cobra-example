@@ -22,7 +22,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var clustercommand = &cobra.Command{
+var clusterCommand = &cobra.Command{
 	Use:   "cluster",
 	Short: "tells you what cluster your on",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -36,8 +36,8 @@ var clustercommand = &cobra.Command{
 
 // implementing init is important ! thats how cobra knows to bind your 'app' to top level command.
 func init() {
-	RootCmd.AddCommand(clustercommand)
+	RootCmd.AddCommand(clusterCommand)
 
 	// specific flags for your app, add them here...
-	clustercommand.Flags().BoolP("omg", "o", false, "oh wow ")
+	clusterCommand.Flags().BoolP("omg", "o", false, "oh wow ")
 }

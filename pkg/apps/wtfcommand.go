@@ -20,7 +20,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var wtfcommand = &cobra.Command{
+var wtfCommand = &cobra.Command{
 	Use:   "example",
 	Short: "blackduckctl example command",
 	Long:  `This is an example of how to add a command to blackduckctl.  Interactive support has to be hardwired.`,
@@ -34,8 +34,8 @@ var wtfcommand = &cobra.Command{
 
 // implementing init is important ! thats how cobra knows to bind your 'app' to top level command.
 func init() {
-	RootCmd.AddCommand(wtfcommand)
+	RootCmd.AddCommand(wtfCommand)
 
 	// specific flags for your app, add them here...
-	wtfcommand.Flags().BoolP("wtf", "w", false, "print 'wtf' as part of the example of how to issue subcommands.")
+	wtfCommand.Flags().BoolP("wtf", "w", false, "print 'wtf' as part of the example of how to issue subcommands.")
 }
