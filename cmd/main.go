@@ -6,10 +6,6 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
-func horizonExample() {
-
-}
-
 func promptuiExample() {
 	prompt := promptui.Select{
 		Label: "Select Day",
@@ -29,4 +25,8 @@ func promptuiExample() {
 		return
 	}
 	fmt.Printf("You choose %q\n", result)
+}
+
+func main() {
+	fmt.Println("---")
 }
